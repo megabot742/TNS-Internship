@@ -1,0 +1,6 @@
+D:\Thuctap\New Lib\1\TNS_Lib\TNS_MIC\TNS_MIC\bin\Debug\TNS_MIC.dll
+D:\Thuctap\New Lib\1\TNS_Lib\TNS_MIC\TNS_MIC\bin\Debug\TNS_MIC.pdb
+D:\Thuctap\New Lib\1\TNS_Lib\TNS_MIC\TNS_MIC\obj\Debug\TNS_MIC.csproj.AssemblyReference.cache
+D:\Thuctap\New Lib\1\TNS_Lib\TNS_MIC\TNS_MIC\obj\Debug\TNS_MIC.csproj.CoreCompileInputs.cache
+D:\Thuctap\New Lib\1\TNS_Lib\TNS_MIC\TNS_MIC\obj\Debug\TNS_MIC.dll
+D:\Thuctap\New Lib\1\TNS_Lib\TNS_MIC\TNS_MIC\obj\Debug\TNS_MIC.pdb

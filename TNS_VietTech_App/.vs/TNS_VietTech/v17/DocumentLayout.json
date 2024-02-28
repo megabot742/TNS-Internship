@@ -1,0 +1,118 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\ThucTap\\TNS_VietTech\\TNS_VietTech_App\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{FEA8C512-4E55-48EE-8BC2-DAEB4AC28BE3}|..\\TNS_Lib\\TNS_Sensor_AccelGyro\\TNS_Sensor_AccelGyro.csproj|d:\\thuctap\\tns_viettech\\tns_lib\\tns_sensor_accelgyro\\sno_mpu6050_accessdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FEA8C512-4E55-48EE-8BC2-DAEB4AC28BE3}|..\\TNS_Lib\\TNS_Sensor_AccelGyro\\TNS_Sensor_AccelGyro.csproj|d:\\thuctap\\tns_viettech\\tns_lib\\tns_sensor_accelgyro\\sno_mpu6050_record.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31D5063F-A07D-41D1-9094-6D98B5C77749}|TNS_VietTech.csproj|d:\\thuctap\\tns_viettech\\tns_viettech_app\\sample\\frmtablerecord.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{31D5063F-A07D-41D1-9094-6D98B5C77749}|TNS_VietTech.csproj|solutionrelative:sample\\frmtablerecord.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31D5063F-A07D-41D1-9094-6D98B5C77749}|TNS_VietTech.csproj|d:\\thuctap\\tns_viettech\\tns_viettech_app\\sample\\frmtablelist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{31D5063F-A07D-41D1-9094-6D98B5C77749}|TNS_VietTech.csproj|solutionrelative:sample\\frmtablelist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31D5063F-A07D-41D1-9094-6D98B5C77749}|TNS_VietTech.csproj|d:\\thuctap\\tns_viettech\\tns_viettech_app\\sample\\frmtablelist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{31D5063F-A07D-41D1-9094-6D98B5C77749}|TNS_VietTech.csproj|solutionrelative:sample\\frmtablelist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31D5063F-A07D-41D1-9094-6D98B5C77749}|TNS_VietTech.csproj|d:\\thuctap\\tns_viettech\\tns_viettech_app\\sample\\frmtablerecord.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{31D5063F-A07D-41D1-9094-6D98B5C77749}|TNS_VietTech.csproj|solutionrelative:sample\\frmtablerecord.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "SNO_MPU6050_AccessData.cs",
+              "DocumentMoniker": "D:\\ThucTap\\TNS_VietTech\\TNS_Lib\\TNS_Sensor_AccelGyro\\SNO_MPU6050_AccessData.cs",
+              "RelativeDocumentMoniker": "..\\TNS_Lib\\TNS_Sensor_AccelGyro\\SNO_MPU6050_AccessData.cs",
+              "ToolTip": "D:\\ThucTap\\TNS_VietTech\\TNS_Lib\\TNS_Sensor_AccelGyro\\SNO_MPU6050_AccessData.cs",
+              "RelativeToolTip": "..\\TNS_Lib\\TNS_Sensor_AccelGyro\\SNO_MPU6050_AccessData.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAANAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-26T01:42:02.602Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "SNO_MPU6050_Record.cs",
+              "DocumentMoniker": "D:\\ThucTap\\TNS_VietTech\\TNS_Lib\\TNS_Sensor_AccelGyro\\SNO_MPU6050_Record.cs",
+              "RelativeDocumentMoniker": "..\\TNS_Lib\\TNS_Sensor_AccelGyro\\SNO_MPU6050_Record.cs",
+              "ToolTip": "D:\\ThucTap\\TNS_VietTech\\TNS_Lib\\TNS_Sensor_AccelGyro\\SNO_MPU6050_Record.cs",
+              "RelativeToolTip": "..\\TNS_Lib\\TNS_Sensor_AccelGyro\\SNO_MPU6050_Record.cs",
+              "ViewState": "AQIAAAsAAAAAAAAAAAAAwAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-26T01:42:00.446Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "FrmTableList.cs",
+              "DocumentMoniker": "D:\\ThucTap\\TNS_VietTech\\TNS_VietTech_App\\Sample\\FrmTableList.cs",
+              "RelativeDocumentMoniker": "Sample\\FrmTableList.cs",
+              "ToolTip": "D:\\ThucTap\\TNS_VietTech\\TNS_VietTech_App\\Sample\\FrmTableList.cs",
+              "RelativeToolTip": "Sample\\FrmTableList.cs",
+              "ViewState": "AQIAAC4AAAAAAAAAAAAswKAAAAA2AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-26T01:17:13.133Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "FrmTableList.cs [Design]",
+              "DocumentMoniker": "D:\\ThucTap\\TNS_VietTech\\TNS_VietTech_App\\Sample\\FrmTableList.cs",
+              "RelativeDocumentMoniker": "Sample\\FrmTableList.cs",
+              "ToolTip": "D:\\ThucTap\\TNS_VietTech\\TNS_VietTech_App\\Sample\\FrmTableList.cs [Design]",
+              "RelativeToolTip": "Sample\\FrmTableList.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-26T01:16:54.361Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "FrmTableRecord.cs",
+              "DocumentMoniker": "D:\\ThucTap\\TNS_VietTech\\TNS_VietTech_App\\Sample\\FrmTableRecord.cs",
+              "RelativeDocumentMoniker": "Sample\\FrmTableRecord.cs",
+              "ToolTip": "D:\\ThucTap\\TNS_VietTech\\TNS_VietTech_App\\Sample\\FrmTableRecord.cs",
+              "RelativeToolTip": "Sample\\FrmTableRecord.cs",
+              "ViewState": "AQIAALoAAAAAAAAAAAAUwMUAAABWAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-26T01:17:06.022Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "FrmTableRecord.cs [Design]",
+              "DocumentMoniker": "D:\\ThucTap\\TNS_VietTech\\TNS_VietTech_App\\Sample\\FrmTableRecord.cs",
+              "RelativeDocumentMoniker": "Sample\\FrmTableRecord.cs",
+              "ToolTip": "D:\\ThucTap\\TNS_VietTech\\TNS_VietTech_App\\Sample\\FrmTableRecord.cs [Design]",
+              "RelativeToolTip": "Sample\\FrmTableRecord.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-26T01:16:55.928Z",
+              "EditorCaption": " [Design]"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
