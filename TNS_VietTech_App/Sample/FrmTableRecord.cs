@@ -46,7 +46,7 @@ namespace TNS.VietTech.App
                 }
             }
         }
-       
+        
         private void Load_Info(DataRow zRow)
 
         {
@@ -103,6 +103,7 @@ namespace TNS.VietTech.App
             txt_AccelZ.Text = "";
             dt_TimeDate.Value = DateTime.Now;
         }
+        //Tạo new record
         public class New_Record
         {
             public string AutoKey { get; set; }
