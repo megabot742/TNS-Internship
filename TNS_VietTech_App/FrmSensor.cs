@@ -11,7 +11,7 @@ namespace TNS.VietTech.App
 {
     public partial class FrmSensor : Form
     {
-
+        //Khởi tạo đối tượng form và thực hiện việc cấu hình giao diện
         public FrmSensor()
         {
             InitializeComponent();
@@ -22,7 +22,7 @@ namespace TNS.VietTech.App
 
             Layout_Init();
         }
-
+        //Cài đặt các hình ảnh nền và hình ảnh cho các nút và logo trên giao diện.
         #region [ Layout ]
         private void Layout_Init()
         {
@@ -42,7 +42,8 @@ namespace TNS.VietTech.App
             this.btn_Exit.Image = Image.FromFile(@"Img\btn_PowerOff.png");
         }
         #endregion
-
+        //Xử lý sự kiện khi form được tải lên. Cài đặt kích thước và vị trí của form dựa trên kích thước màn hình chính.
+        //Khởi động một định thời để cập nhật dữ liệu trên giao diện.
         private void FrmSensor_Load(object sender, EventArgs e)
         {
             #region [ Window State ]
@@ -54,6 +55,7 @@ namespace TNS.VietTech.App
 
             Timer_ShowData.Start();
         }
+        //Xử lý sự kiện khi form được vẽ. Vẽ các đối tượng và dữ liệu lên giao diện.
         private void FrmSensor_Paint(object sender, PaintEventArgs e)
         {
             Graphics g;
@@ -109,6 +111,7 @@ namespace TNS.VietTech.App
             e.Graphics.DrawImageUnscaled(zDrawing, 0, 0);
             g.Dispose();
         }
+        //Xử lý sự kiện khi định thời Timer_ShowData kích hoạt. Gọi hàm Invalidate() để yêu cầu vẽ lại form.
         private void Timer_ShowData_Tick(object sender, EventArgs e)
         {
             Timer_ShowData.Stop();
@@ -119,19 +122,21 @@ namespace TNS.VietTech.App
         }
 
         #region [ Log ]
-        private List<string> _Log_Buffer = new List<string>();
-        private string _Log_Data = "";
+        private List<string> _Log_Buffer = new List<string>(); //Một danh sách lưu trữ các thông điệp log
+        private string _Log_Data = ""; //Một biến lưu trữ dữ liệu log
         #endregion
 
         #region [ Sensor MPU6050 ]
-        private TNS.Sensor.AccelGyro.Sensor _MPU6050 = new Sensor.AccelGyro.Sensor();
+        private TNS.Sensor.AccelGyro.Sensor _MPU6050 = new Sensor.AccelGyro.Sensor(); // Một đối tượng cảm biến MPU6050
         #endregion
-
+        //Xử lý sự kiện khi nút "Setting" được nhấn.
         #region [ UART ]
-
+        //Khai báo cho giao thức UART
         private byte STX = (byte)'{';
         private byte ETX = (byte)'}';
         private volatile List<byte> _UART_Buffer = new List<byte>();
+        
+        //Hiển thị một cửa sổ điều khiển COM port và cấu hình UART dựa trên thông tin nhập từ cửa sổ đó
         private void btn_Setting_Click(object sender, EventArgs e)
         {
             FrmPort frm = new FrmPort();
@@ -156,19 +161,20 @@ namespace TNS.VietTech.App
                 }
             }
         }
+        //Thiết lập các thông số cho đối tượng UART
         private void UART_Init(Lib.UART_Setting Setting)
         {
-            UART.PortName = Setting.PortName;
-            UART.BaudRate = Setting.BaudRate;
-            UART.DataBits = Setting.DataBits;
-            UART.Parity = (Parity)Setting.Parity;
-            UART.StopBits = (StopBits)Setting.StopBits; ;
+            UART.PortName = Setting.PortName; //bao gồm cổng 
+            UART.BaudRate = Setting.BaudRate; //tốc độ truyền
+            UART.DataBits = Setting.DataBits; //bits dữ liệu
+            UART.Parity = (Parity)Setting.Parity; //kiểm tra chẵn/lẻ
+            UART.StopBits = (StopBits)Setting.StopBits; ; //bits dừng
             UART.DtrEnable = true;
             UART.RtsEnable = true;
 
             try
             {
-                UART.Open();
+                UART.Open(); //và mở cổng UART.
                 _Log_Buffer.Add("[" + DateTime.Now.ToString("HH:mm:ss.fff") + "] " + UART.PortName + " opened");
             }
             catch (Exception ex)
@@ -177,8 +183,10 @@ namespace TNS.VietTech.App
             }
 
         }
+        //Xử lý sự kiện khi dữ liệu được nhận từ cổng UART. 
         private void UART_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
+            //Đọc các byte dữ liệu và xử lý gói tin dữ liệu nhận được
             while (UART.BytesToRead > 0)
             {
                 byte zByteComming = (byte)UART.ReadByte();
@@ -205,7 +213,7 @@ namespace TNS.VietTech.App
 
             }
         }
-
+        //Xử lý sự kiện khi nút "Exit" được nhấn.Đóng ứng dụng.
         #endregion
         private void btn_Exit_Click(object sender, EventArgs e)
         {

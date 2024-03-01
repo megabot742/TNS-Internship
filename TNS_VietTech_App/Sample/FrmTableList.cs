@@ -10,6 +10,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TNS.Sensor.AccelGyro;
 
 namespace TNS.VietTech.App
 {
@@ -24,8 +25,7 @@ namespace TNS.VietTech.App
         {
             LV_Init();
 
-            DataTable zTable = TNS.Sensor.AccelGyro.SNO_MPU6050_AccessData.List();
-            LV_LoadData(zTable);
+            
         }
         private void LV_Init() //Khởi tạo các model cho bảng listview
         {
@@ -100,6 +100,7 @@ namespace TNS.VietTech.App
         }
         public void LV_LoadData(DataTable In_Table)
         {
+
             LV_Data.Items.Clear(); // Xóa các mục hiện tại trong ListView
             int stt = 1;
             foreach (DataRow row in In_Table.Rows)
@@ -133,61 +134,25 @@ namespace TNS.VietTech.App
 
                 FrmTableRecord frm = new FrmTableRecord(); 
                 frm.AutoKey = zID;
-                if (frm.ShowDialog() == DialogResult.OK) 
-                {
-                    frm.Close();
-                    DataTable zTable = TNS.Sensor.AccelGyro.SNO_MPU6050_AccessData.List(); 
-                    LV_LoadData(zTable);
-                }
+                frm.ShowDialog();
+                FrmTableList_Load(null,null);
+
             }
         }
 
         private void btn_Add_Click(object sender, EventArgs e)
-        { 
-            FrmTableRecord frm = new FrmTableRecord(); //Tạo mới record
-            frm.isUpdate = false;
-            if (frm.ShowDialog() == DialogResult.OK) //Check kết nối
-            {
-                frm.Close();
-                DataTable zTable = TNS.Sensor.AccelGyro.SNO_MPU6050_AccessData.List(); //Đẩy dữ liệu
-                LV_LoadData(zTable);
-            }
+        {
+            FrmTableRecord frm = new FrmTableRecord();
+            frm.AutoKey = "";
+            frm.ShowDialog();
+            FrmTableList_Load(null, null);
         }
 
         private void btn_Search_Click(object sender, EventArgs e)
         {
-            string input = txt_search.Text.Trim(); // Lấy địa chỉ từ TextBox
-            string dateFormat = "dd/MM/yyyy";
-            string fromDate = dtp_fromday.Value.ToString(); // Lấy ngày bắt đầu từ DateTimePicker
-            string toDate = dtp_today.Value.ToString(); // Lấy ngày kết thúc từ DateTimePicker
-            DateTime date;
-            DataTable searchResult;
-            
-            if (!string.IsNullOrEmpty(input) && DateTime.TryParseExact(input, dateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
-            {
-                // Kiểm tra nếu giá trị của input là ngày tháng hợp lệ
-                searchResult = TNS.Sensor.AccelGyro.SNO_MPU6050_Record.Search_By_Day(input);
-                // Gán dữ liệu vào ListView
-            }
-            else if (!string.IsNullOrEmpty(input))
-            {
-                // Giá trị của input là một địa chỉ
-                searchResult = TNS.Sensor.AccelGyro.SNO_MPU6050_Record.Search_By_Address(input);
-                // Gán dữ liệu vào ListView
-            }
-            else if (!string.IsNullOrEmpty(fromDate) && !string.IsNullOrEmpty(toDate))
-            {
-                // Kiểm tra nếu có giá trị cho cả fromDate và toDate
-                searchResult = TNS.Sensor.AccelGyro.SNO_MPU6050_Record.Search_Between_Day(fromDate, toDate);
-                // Gán dữ liệu vào ListView
-            }
-            else
-            {
-                // Xử lý trường hợp không nhập địa chỉ hoặc ngày
-                return;
-            }
-            // Gán dữ liệu vào ListView
-            LV_LoadData(searchResult);
+            DataTable dt = new DataTable();
+            dt = SNO_MPU6050_Data.ListOrder(dtp_fromday.Value, dtp_today.Value, txt_search.Text.Trim());
+            LV_LoadData(dt);
         }
     }
 }

@@ -87,3 +87,5 @@ D:\Thuctap\Check\TNS_VietTech_App\bin\Debug\TNS_Sensor_AccelGyro.dll
 D:\Thuctap\Check\TNS_VietTech_App\bin\Debug\TNS_DBConnection.pdb
 D:\Thuctap\Check\TNS_VietTech_App\bin\Debug\TNS_Sensor_AccelGyro.pdb
 D:\Thuctap\Check\TNS_VietTech_App\obj\Debug\TNS_VietTech.csproj.CopyComplete
+D:\Thuctap\Check\TNS_VietTech_App\bin\Debug\TNS_MIC.dll
+D:\Thuctap\Check\TNS_VietTech_App\bin\Debug\TNS_MIC.pdb

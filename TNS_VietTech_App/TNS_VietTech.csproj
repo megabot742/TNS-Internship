@@ -144,6 +144,10 @@
       <Project>{FEA8C512-4E55-48EE-8BC2-DAEB4AC28BE3}</Project>
       <Name>TNS_Sensor_AccelGyro</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\New Lib\1\TNS_Lib\TNS_MIC\TNS_MIC\TNS_MIC.csproj">
+      <Project>{5A88C785-0E4C-4EDF-A2A1-23DC21A6DED9}</Project>
+      <Name>TNS_MIC</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

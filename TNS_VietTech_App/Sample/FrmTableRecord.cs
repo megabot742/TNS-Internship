@@ -11,6 +11,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TNS.Sensor.AccelGyro;
+using TNS_MIC;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace TNS.VietTech.App
 {
@@ -18,8 +20,7 @@ namespace TNS.VietTech.App
     {
         private string _Message;
         public bool isUpdate = false;
-        //public string STT { get; set; }
-        public string AutoKey { get; set; }
+        public string AutoKey = "";
 
         public FrmTableRecord()
         {
@@ -30,70 +31,29 @@ namespace TNS.VietTech.App
 
         private void FrmTableRecord_Load(object sender, EventArgs e)
         {
-            DataTable dt = new DataTable();
-            if (!string.IsNullOrEmpty(AutoKey))
-            {
-                dt = SNO_MPU6050_Record.Find_By_AutoKey(AutoKey); // Gọi xử lý kiểm tra FindIDByAutoKey
-                if (dt != null && dt.Rows.Count > 0)
-                {
-                    DataRow zRow = dt.Rows[0];
-                    AutoKey = zRow["AutoKey"].ToString();
-                    Load_Info(zRow);
-                }
-                else
-                {
-                    AutoKey = null;
-                }
-            }
+            if(AutoKey == "")
+                ClearForm();
+            else
+                Load_Info();
+            
         }
         
-        private void Load_Info(DataRow zRow)
-
+        private void Load_Info()
         {
+            SNO_MPU6050_Info info = new SNO_MPU6050_Info(AutoKey);
             //Key = "8fabd893-d574-45e6-ad7e-1392341ff136";
-            if (zRow != null)
-            {
-                string autoKey = zRow["AutoKey"].ToString();
-                string address = zRow["Address"].ToString();
-                float gyroX = float.Parse(zRow["Gyro_X"].ToString());
-                float gyroY = float.Parse(zRow["Gyro_Y"].ToString());
-                float gyroZ = float.Parse(zRow["Gyro_Z"].ToString());
-                float accelX = float.Parse(zRow["Accel_X"].ToString());
-                float accelY = float.Parse(zRow["Accel_Y"].ToString());
-                float accelZ = float.Parse(zRow["Accel_Z"].ToString());
-                DateTime? timeDate = zRow["TimeDate"] != DBNull.Value ? (DateTime?)zRow["TimeDate"] : null;
-
-                New_Record record = new New_Record(autoKey, address, gyroX, gyroY, gyroZ, accelX, accelY, accelZ, timeDate);
-
-                // Load dữ liệu từ record lên form
-                txt_AutoKey.Text = record.AutoKey;
-                txt_Address.Text = record.Address;
-                txt_GyroX.Text = record.GyroX.ToString();
-                txt_GyroY.Text = record.GyroY.ToString();
-                txt_GyroZ.Text = record.GyroZ.ToString();
-                txt_AccelX.Text = record.AccelX.ToString();
-                txt_AccelY.Text = record.AccelY.ToString();
-                txt_AccelZ.Text = record.AccelZ.ToString();
-                if (record.TimeDate.HasValue)
-                {
-                    dt_TimeDate.Value = record.TimeDate.Value;
-                }
-                else
-                {
-                    dt_TimeDate.Value = DateTime.Now;
-                }
-            }
-            else
-            {
-                // Xử lý khi không tìm thấy dữ liệu
-                MessageBox.Show("Không tìm thấy dữ liệu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                ClearForm();
-            }
+            txt_Address.Text = info.Address;
+            txt_GyroX.Text = info.Gyro_X.ToString();
+            txt_GyroY.Text = info.Gyro_Y.ToString();
+            txt_GyroZ.Text = info.Gyro_Z.ToString();
+            txt_AccelX.Text = info.Accel_X.ToString();
+            txt_AccelY.Text = info.Accel_Y.ToString();
+            txt_AccelZ.Text = info.Accel_Z.ToString();
         }
         //Dọn dẹp form
         private void ClearForm()
         {
-            txt_AutoKey.Text = "";
+            AutoKey = "";
             txt_Address.Text = "";
             txt_GyroX.Text = "";
             txt_GyroY.Text = "";
@@ -103,140 +63,123 @@ namespace TNS.VietTech.App
             txt_AccelZ.Text = "";
             dt_TimeDate.Value = DateTime.Now;
         }
-        //Tạo new record
-        public class New_Record
-        {
-            public string AutoKey { get; set; }
-            public string Address { get; set; }
-            public float GyroX { get; set; }
-            public float GyroY { get; set; }
-            public float GyroZ { get; set; }
-            public float AccelX { get; set; }
-            public float AccelY { get; set; }
-            public float AccelZ { get; set; }
-            public DateTime? TimeDate { get; set; }
-
-            public New_Record(string autoKey, string address, float gyroX, float gyroY, float gyroZ, float accelX, float accelY, float accelZ, DateTime? timeDate)
-            {
-                AutoKey = autoKey;
-                Address = address;
-                GyroX = gyroX;
-                GyroY = gyroY;
-                GyroZ = gyroZ;
-                AccelX = accelX;
-                AccelY = accelY;
-                AccelZ = accelZ;
-                TimeDate = timeDate;
-            }
-        }
-
-        //Function update
-        public int Update_Info(string AutoKey)
-        {
-            string zSQL = string.Empty;
-
-            if (string.IsNullOrEmpty(AutoKey))
-            {
-               zSQL = "INSERT INTO [dbo].[SNO_MPU6050] " +
-               "(Address,TimeDate, Gyro_X, Gyro_Y, Gyro_Z, Accel_X, Accel_Y, Accel_Z) " +
-               "VALUES " +
-               "(@Address,@TimeDate, @Gyro_X, @Gyro_Y, @Gyro_Z, @Accel_X, @Accel_Y, @Accel_Z)";
-            }
-            else
-            {
-                zSQL = "UPDATE [dbo].[SNO_MPU6050] SET " +
-                              "Address = @Address," +
-                              "Gyro_X = @Gyro_X," +
-                              "Gyro_Y = @Gyro_Y," +
-                              "Gyro_Z = @Gyro_Z," +
-                              "Accel_X = @Accel_X," +
-                              "Accel_Y = @Accel_Y," +
-                              "Accel_Z = @Accel_Z " +
-                              "WHERE AutoKey = @AutoKey";
-            }
-            int zResult =0;
-            string zConnectionString = TNS_DBConnection.Connecting.SQL_MainDatabase;
-            SqlConnection zConnect = new SqlConnection(zConnectionString);
-            zConnect.Open();
-            try
-            {
-                decimal? GyroX = TryParseDecimal(txt_GyroX.Text);
-                decimal? GyroY = TryParseDecimal(txt_GyroY.Text);
-                decimal? GyroZ = TryParseDecimal(txt_GyroZ.Text);
-                decimal? AccelX = TryParseDecimal(txt_AccelX.Text);
-                decimal? AccelY = TryParseDecimal(txt_AccelY.Text);
-                decimal? AccelZ = TryParseDecimal(txt_AccelZ.Text);
-                DateTime? timedate = dt_TimeDate.Value;
-
-                decimal? TryParseDecimal(string value)
-                {
-                    return decimal.TryParse(value, out decimal result) ? result : (decimal?)null;
-                }
-
-                using (SqlCommand zCommand = new SqlCommand(zSQL, zConnect))
-                {
-                    zCommand.CommandType = CommandType.Text;
-                    if (!string.IsNullOrEmpty(AutoKey))
-                    {
-                        zCommand.Parameters.Add("@AutoKey", SqlDbType.UniqueIdentifier).Value = new Guid(AutoKey);
-                    }
-                    if (timedate.HasValue)
-                    {
-                        zCommand.Parameters.Add("@TimeDate", SqlDbType.DateTime).Value = timedate.Value;
-                    }
-                    else
-                    {
-                        zCommand.Parameters.Add("@TimeDate", SqlDbType.DateTime).Value = DBNull.Value;
-                    }
-                    zCommand.Parameters.AddWithValue("@Address", txt_Address.Text);
-                    zCommand.Parameters.AddWithValue("@Gyro_X", GyroX);
-                    zCommand.Parameters.AddWithValue("@Gyro_Y", GyroY);
-                    zCommand.Parameters.AddWithValue("@Gyro_Z", GyroZ);
-                    zCommand.Parameters.AddWithValue("@Accel_X", AccelX);
-                    zCommand.Parameters.AddWithValue("@Accel_Y", AccelY);
-                    zCommand.Parameters.AddWithValue("@Accel_Z", AccelZ);
-                    zResult = zCommand.ExecuteNonQuery();
-                }
-                _Message = "200 OK";
-            }
-            catch (Exception ex)
-            {
-                _Message = "501 " + ex.Message;
-            }
-            finally
-            {
-                zConnect.Close();
-            }
-            return zResult;
-        }
-        //Function Check
-        private bool Check_AutoKey(string AutoKey)
-        {
-            DataTable dt = SNO_MPU6050_Record.Find_By_AutoKey(AutoKey);
-            return dt != null && dt.Rows.Count > 0;
-        }
 
         //Button delete table
         private void btn_Delete_Click(object sender, EventArgs e)
         {
-            if (Check_AutoKey(AutoKey))
+            SNO_MPU6050_Info info = new SNO_MPU6050_Info(AutoKey);
+            info.Empty();
+            if (info.Message.Substring(0,3) == "200")
             {
-                SNO_MPU6050_Record.Delete_By_AutoKey(AutoKey);
-                this.DialogResult = DialogResult.OK;
-                MessageBox.Show("Record with AutoKey has been deleted.");
+                MessageBox.Show("Xóa thành công");
+                this.Close();
             }
             else
-            {
-                MessageBox.Show("Invalid AutoKey. Record not found.");
-            }
+                MessageBox.Show("Lỗi");
         }
         //Button update table
+        private string CheckBeforSave()
+        {
+            string zResult = "";
+            if (txt_Address.Text.ToString() == "")
+            {
+                zResult += "Vui lòng điền mã địa chỉ! \n";
+            }
+            if (txt_GyroX.Text.ToFloat() == 0)
+            {
+                zResult += "Vui lòng điền \n";
+            }
+            if (txt_GyroY.Text.ToFloat() == 0)
+            {
+                 zResult += "Vui lòng điền \n";
+            }
+            if (txt_GyroZ.Text.ToFloat() == 0)
+            {
+                 zResult += "Vui lòng điền \n";
+            }
+            if (txt_AccelX.Text.ToFloat() == 0)
+            {
+                    zResult += "Vui lòng điền \n";
+            }
+            if (txt_AccelY.Text.ToFloat() == 0)
+            {
+                    zResult += "Vui lòng điền \n";
+             }
+            if (txt_AccelZ.Text.ToFloat() == 0)
+            {
+                    zResult += "Vui lòng điền \n";
+            }
+            return zResult;
+        }
+        
         private void btn_Update_Click(object sender, EventArgs e)
         {
-            if (Update_Info(AutoKey) == 1)
-                this.DialogResult = DialogResult.OK;
+            SNO_MPU6050_Info info;
+            if (AutoKey == "")
+                info = new SNO_MPU6050_Info();
+
             else
-                MessageBox.Show(_Message);
+                info = new SNO_MPU6050_Info(AutoKey);
+
+            if (CheckBeforSave() == "")
+            {
+                info.Address = txt_Address.Text.ToString().Trim();
+                if (dt_TimeDate.Value != DateTime.MinValue)
+                {
+                   info.TimeDate = dt_TimeDate.Value;
+                }
+                float zGyro_X = 0;
+                if (float.TryParse(txt_GyroX.Text, out zGyro_X))
+                {
+
+                }
+                info.Gyro_X = zGyro_X;
+                float zGyro_Y = 0;
+                if (float.TryParse(txt_GyroY.Text, out zGyro_Y))
+                {
+
+                }
+                info.Gyro_Y = zGyro_Y;
+                float zGyro_Z = 0;
+                if (float.TryParse(txt_GyroZ.Text, out zGyro_Z))
+                {
+
+                }
+                info.Gyro_Z = zGyro_Z;
+                float zAccel_X = 0;
+                if (float.TryParse(txt_AccelX.Text, out zAccel_X))
+                {
+
+                }
+                info.Accel_X = zAccel_X;
+                float zAccel_Y = 0;
+                if (float.TryParse(txt_AccelY.Text, out zAccel_Y))
+                {
+
+                }
+                info.Accel_Y = zAccel_Y;
+                float zAccel_Z = 0;
+                if (float.TryParse(txt_AccelZ.Text, out zAccel_Z))
+                {
+
+                }
+                info.Accel_Z = zAccel_Z;
+                info.Save();
+                if (info.Message.Substring(0,3) == "200" || info.Message.Substring(0, 3) == "201")
+                {
+                    MessageBox.Show("Thành công");
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Lỗi" + info.Message);
+                }
+            }
+        }
+
+        private void btn_new_Click(object sender, EventArgs e)
+        {
+            ClearForm();
         }
     }
 }
